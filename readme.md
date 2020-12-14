@@ -15,3 +15,5 @@ SQL - INSERT, SELECT, UPDATE, DELETE
 relacje miedzy tabelami: 1:1, 1:wielu, wiele:wielu
 
 item.category  . w jinja wartosc z slownika
+
+koercja - niejawne rzutowanie typow danych
