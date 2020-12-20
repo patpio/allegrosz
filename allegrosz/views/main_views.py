@@ -44,6 +44,10 @@ def index():
         filter_queries.append('i.title LIKE ?')
         parameters.append(f'%{form.title.data.strip()}%')  # search
 
+    if form.description.data.strip():
+        filter_queries.append('i.description LIKE ?')
+        parameters.append(f'%{form.description.data.strip()}%')
+
     if form.category.data:
         filter_queries.append('i.category_id = ?')
         parameters.append(form.category.data)
@@ -51,6 +55,9 @@ def index():
     if form.subcategory.data:
         filter_queries.append('i.subcategory_id = ?')
         parameters.append(form.subcategory.data)
+
+    if form.cheap_items.data:
+        filter_queries.append('i.price <= 40')
 
     if filter_queries:
         query += ' WHERE '
@@ -82,5 +89,5 @@ def index():
 
     return render_template('index.html', items=items, form=form)
 
-# TODO search per description
-# TODO invent new filter *
+# TODO search per description - done
+# TODO invent new filter - additional homework - done

@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileAllowed
-from wtforms import StringField, FloatField, TextAreaField, FileField, SelectField, SubmitField
+from wtforms import StringField, FloatField, TextAreaField, FileField, SelectField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, InputRequired, Length
 
 
@@ -32,7 +32,9 @@ class DeleteItemForm(FlaskForm):
 
 class FilterForm(FlaskForm):
     title = StringField('Title', validators=[Length(max=20, message='Less than 20')])
+    description = StringField('Description', validators=[Length(max=40, message='Less than 40')])
     price = SelectField('Price', coerce=int, choices=[(0, '---'), (1, 'Max to min'), (2, 'Min to max')])
     category = SelectField('Category', coerce=int)
     subcategory = SelectField('Subcategory', coerce=int)
+    cheap_items = BooleanField('Items up to 40 pln')
     submit = SubmitField('Filter')
