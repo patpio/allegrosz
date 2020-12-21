@@ -27,7 +27,14 @@ class EditItemForm(ItemForm):
 
 
 class DeleteItemForm(FlaskForm):
+    price = FloatField('Price')
     submit = SubmitField('Delete')
+
+    # TODO extra validators (in class)
+
+    @staticmethod
+    def validate_price(self, new_price):
+        return False
 
 
 class FilterForm(FlaskForm):
