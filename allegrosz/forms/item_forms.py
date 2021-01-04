@@ -3,12 +3,15 @@ from flask_wtf.file import FileAllowed
 from wtforms import StringField, FloatField, TextAreaField, FileField, SelectField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, InputRequired, Length
 
+from .belongs_to_other_field_option import BelongsToOtherFieldOption
+from ..forms.price_field import PriceField
+
 
 class ItemForm(FlaskForm):
     title = StringField('Title',
                         validators=[InputRequired('Input is required.'), DataRequired('Data is required.'),
                                     Length(min=5, max=20, message='Input must be between 5 and 20 characters long.')])
-    price = FloatField('Price')
+    price = PriceField('Price')
     description = TextAreaField('Description',
                                 validators=[InputRequired('Input is required.'), DataRequired('Data is required.'),
                                             Length(min=5, max=40,
@@ -18,7 +21,8 @@ class ItemForm(FlaskForm):
 
 class NewItemForm(ItemForm):
     category = SelectField('Category', coerce=int)
-    subcategory = SelectField('Subcategory', coerce=int)
+    subcategory = SelectField('Subcategory', coerce=int,
+                              validators=[BelongsToOtherFieldOption(table='subcategory', belongs_to='category')])
     submit = SubmitField('Add')
 
 

@@ -8,9 +8,13 @@ def create_app():
 
     from .views import bp_main
     from .views import bp_item
+    from .views import bp_comment
+    from .views import bp_category
 
     allegrosz.register_blueprint(bp_main)
     allegrosz.register_blueprint(bp_item)
+    allegrosz.register_blueprint(bp_comment)
+    allegrosz.register_blueprint(bp_category)
 
     @allegrosz.teardown_appcontext
     def close_connection(exception):
